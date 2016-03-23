@@ -1,0 +1,22 @@
+<h3>Books</h3>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% _.each(books, function (book) { %>
+  <tr data-id="<% book.id%>" data-model="book">
+    <td><%= book.id %></td>
+    <td><%= book.name %></td>
+    <td><%= book.email %></td>
+    <td><a href="/book/show/<%= book.id %>">Show</a></td>
+    <td><a href="/book/edit/<%= book.id %>">Edit</a></td>
+    <td><a href="/book/destroy/<%= book.id %>">Delete</a></td>
+  </tr>
+
+  <% }) %>
+</table>

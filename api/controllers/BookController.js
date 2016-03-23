@@ -28,6 +28,46 @@ module.exports = {
         book: book
       })
     })
+  },
+
+  'index': function (req, res, next) {
+    Book.find(function foundBook(err, books) {
+      if (err) return next(err);
+
+      res.view({
+        books: books
+      })
+    })
+  },
+
+  'edit': function (req, res, next) {
+    Book.findOne(req.param('id'), function foundBook(err, book) {
+      if (err) return next(err);
+      if (!book) return next();
+
+      res.view({
+        book: book
+      })
+    })
+  },
+
+  'update': function (req, res, next) {
+    Book.update(req.param('id'), req.params.all(), function bookUpdated(err) {
+      if (err) {
+        console.log("err", err);
+        return res.redirect('/book/edit/' + req.param('id'))
+      }
+
+
+      console.log("req", req);
+      res.redirect('/book/show/' + req.param('id'));
+    })
+  },
+
+  'destroy': function (req, res, next) {
+    Book.destroy(req.param('id')).exec(function () {
+      res.redirect('/book/');
+    });
   }
 };
 
