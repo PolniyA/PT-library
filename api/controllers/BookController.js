@@ -1,10 +1,3 @@
-/**
- * BookController
- *
- * @description :: Server-side logic for managing books
- * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
- */
-
 module.exports = {
 
   'new': function (req, res) {
@@ -17,17 +10,31 @@ module.exports = {
 
       res.redirect('/book/show/' + book.id)
     });
+  }
+  /*
+
+
+   'destroy': function (req, res, next) {
+   Book.destroy(req.param('id')).exec(function () {
+   res.redirect('/book/');
+   });
+   },
+
+
+
+   'new': function (req, res) {
+    res.view();
   },
 
   'show': function (req, res, next) {
-    Book.findOne(req.param('id'), function foundBook(err, book) {
+    Book.findOne(req.param('id')).populateAll().exec(function foundBook(err, book) {
       if (err) return next(err);
       if (!book) return next();
 
       res.view({
         book: book
-      })
-    })
+      });
+    });
   },
 
   'index': function (req, res, next) {
@@ -64,10 +71,6 @@ module.exports = {
     })
   },
 
-  'destroy': function (req, res, next) {
-    Book.destroy(req.param('id')).exec(function () {
-      res.redirect('/book/');
-    });
-  }
+  */
 };
 

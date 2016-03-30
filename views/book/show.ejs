@@ -1,4 +1,37 @@
-<h1><%= book.name %></h1>
+<h1><%= book.title %></h1>
 <hr />
 <h3>Email: <%=book.email %></h3>
 <h4><%=book.state %></h4>
+
+<hr />
+
+<h3>Stocks</h3>
+<table>
+  <tr>
+    <th>Symbol</th>
+    <th>Number</th>
+    <th>Current Price</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% _.each(book.stocks, function (stock) { %>
+
+  <tr data-id="<% stock.id %>" data-model="book">
+    <td><%= stock.symbol %></td>
+    <td><%= stock.number_of_shares %></td>
+    <td></td>
+    <td><a href="/stock/show/<%= stock.id %>">Show</a></td>
+    <td><a href="/stock/edit/<%= stock.id %>">Edit</a></td>
+    <td><a href="/stock/destroy/<%= stock.id %>">Delete</a></td>
+  </tr>
+
+  <% }) %>
+</table>
+
+<form action="/stock/new" method="POST">
+  <input value="<%= book.id %>" type="hidden" name="owner" /><br />
+  <input type="submit" value="Create stock"/>
+</form>
+

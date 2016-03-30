@@ -31,8 +31,9 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/alexander/PT-library.git"
+    "url": "git://github.com/sefimov/PT-library.git"
   },
   "author": "alexander",
-  "license": ""
+  "license": "",
+  "devDependencies": {}
 }

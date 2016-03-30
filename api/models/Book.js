@@ -1,26 +1,54 @@
-/**
- * Book.js
- *
- * @description :: TODO: You might write a short summary of how this model works and what it represents here.
- * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
- */
-
 module.exports = {
 
   attributes: {
-    name: {
+
+    // The book's title
+    // e.g. Dandelion Wine
+    title: {
+      type: 'string',
+      required: true,
+      unique: true
+    },
+
+    // The author's full name
+    // e.g. Bradbury Ray
+    author: {
       type: 'string',
       required: true
     },
 
-    email: {
+    // The year of publishing
+    // e.g. 1957
+    year: {
       type: 'string',
-      email: true
+      required: true
     },
 
-    state: {
-      type: 'string'
+    // The book's genre
+    // e.g. prose
+    genre: {
+      type: 'string',
+      required: true
+    },
+
+    // The book's description
+    // e.g. "World-renowned fantasist Ray Bradbury has on several occasions stepped outside the arenas of horror, ..."
+    description: {
+      type: 'text',
+      required: true
+    },
+
+    // The set of comments for each book
+    comments: {
+      collection: 'commentsAndRatings',
+      via: 'comments'
+    },
+
+    // The float number that takes from user's rating
+    // e.g. 3.785
+    rating: {
+      collection: 'commentsAndRatings',
+      via: 'rating'
     }
   }
 };
-
