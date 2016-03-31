@@ -38,6 +38,13 @@ module.exports = {
       required: true
     },
 
+    // The book's picture
+    // this field is a base64 present
+    picture: {
+      type: 'text',
+      required: true
+    },
+
     // The set of comments for each book
     comments: {
       collection: 'commentsAndRatings',

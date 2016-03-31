@@ -10,20 +10,6 @@ module.exports = {
 
       res.redirect('/book/show/' + book.id)
     });
-  }
-  /*
-
-
-   'destroy': function (req, res, next) {
-   Book.destroy(req.param('id')).exec(function () {
-   res.redirect('/book/');
-   });
-   },
-
-
-
-   'new': function (req, res) {
-    res.view();
   },
 
   'show': function (req, res, next) {
@@ -71,6 +57,10 @@ module.exports = {
     })
   },
 
-  */
+  'destroy': function (req, res, next) {
+    Book.destroy(req.param('id')).exec(function () {
+      res.redirect('/book/');
+    });
+  }
 };
 

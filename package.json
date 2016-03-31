@@ -33,7 +33,9 @@
     "type": "git",
     "url": "git://github.com/sefimov/PT-library.git"
   },
-  "author": "alexander",
+  "author": "sefimov",
   "license": "",
-  "devDependencies": {}
+  "devDependencies": {
+    "angular-base64-upload": "^0.1.19"
+  }
 }

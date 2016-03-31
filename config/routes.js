@@ -36,7 +36,9 @@ module.exports.routes = {
   // Custom server-render HTML webpage
   ////////////////////////////////////////////////////////////////////////////
 
-  'GET /' : {view: 'library'}
+  'GET /' : {view: 'library'},
+
+  'POST /book/new': 'BookController.create'
 
 
   //'/': {

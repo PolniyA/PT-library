@@ -1,8 +1,156 @@
-<form action="/book/create" method="POST">
-  <h2>Create a Book</h2>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Library of your dreams</title>
 
-  <input type="text" placeholder="Name" name="name" /><br />
-  <input type="text" placeholder="Email" name="email" /><br />
-  <input type="text" placeholder="State" name="state" /><br />
-  <input type="submit" value="Create book"/>
-</form>
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    <!--STYLES-->
+    <link rel="stylesheet" href="/styles/angular-toastr.css">
+    <link rel="stylesheet" href="/styles/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/importer.css">
+    <!--STYLES END-->
+
+  </head>
+
+  <body ng-app="CreateBookModule" ng-controller="CreateBookController" ng-cloak>
+
+  <!-- Create form -->
+  <form ng-submit="submitCreateBook()" id="create-book" class="form-create" name="create">
+    <h2 class="form-create-heading">Добавление книги</h2>
+
+    <div class="row">
+      <div class="control-group form-group col-xs-12"
+          ng-class="{'has-error' : create.title.$invalid && create.title.$dirty}">
+        <label>Название книги</label>
+
+        <input type="text" class="form-control" placeholder="Вино из одуванчиков" name="title" required
+               ng-model="createForm.title"
+               ng-maxlength="50" />
+
+        <span class="help-block has-error" ng-if="create.title.$dirty">
+          <span ng-show="create.title.$error.required">Введите название</span>
+          <span ng-show="create.title.$error.maxlength">Название не может содеражать больше 50 символов</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="control-group form-group col-xs-12"
+          ng-class="{'has-error' : create.author.$invalid && create.author.$dirty}">
+        <label>Автор</label>
+
+        <input type="text" class="form-control" placeholder="Рэй Брэдбери" name="author" required
+               ng-model="createForm.author"
+               ng-maxlength="50" />
+
+        <span class="help-block has-error" ng-if="create.author.$dirty">
+          <span ng-show="create.author.$error.required">Введите ФИО автора</span>
+          <span ng-show="create.author.$error.maxlength">Название не может содеражать больше 50 символов</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="control-group form-group col-xs-12"
+          ng-class="{'has-error' : create.year.$invalid && create.year.$dirty}">
+        <label>Дата первой публикации</label>
+
+        <input type="number" class="form-control" placeholder="1957" name="year" required
+               ng-model="createForm.year"
+               ng-maxlength="4"
+               min="0"/>
+
+        <span class="help-block has-error" ng-if="create.year.$dirty">
+          <span ng-show="create.year.$error.required">Введите дату публикации</span>
+          <span ng-show="create.year.$error.maxlength">Год не может содержать больше 4 цифр</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="control-group form-group col-xs-12"
+          ng-class="{'has-error' : create.genre.$invalid && create.genre.$dirty}">
+        <label>Жанр</label>
+
+        <input type="text" class="form-control" placeholder="Реализм" name="genre" required
+               ng-model="createForm.genre"
+               ng-maxlength="25" />
+
+        <span class="help-block has-error" ng-if="create.genre.$dirty">
+          <span ng-show="create.genre.$error.required">Введите название жанра</span>
+          <span ng-show="create.genre.$error.maxlength">Жанр не может содеражать больше 25 символов</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="control-group form-group col-xs-12"
+          ng-class="{'has-error' : create.description.$invalid && create.description.$dirty}">
+        <label>Название книги</label>
+
+        <textarea type="text" class="form-control" rows="4" required
+                  placeholder="Дедушка Тома и Дугласа каждое лето готовит вино из одуванчиков. Часто Дуглас размышляет о том, что это вино должно хранить в себе текущее время, те события, которые произошли, когда вино было сделано: «Вино из одуванчиков. Сами эти слова — точно лето на языке. Вино из одуванчиков — пойманное и закупоренное в бутылке лето»."
+                  name="description"
+                  ng-model="createForm.description"
+                  ng-minlength="50"></textarea>
+
+        <span class="help-block has-error" ng-if="create.description.$dirty">
+          <span ng-show="create.description.$error.required">Введите описание</span>
+          <span ng-show="create.description.$error.minlength">Описание не может содеражать меньше 50 символов</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="control-group form-group col-xs-12"
+          ng-class="{'has-error' : create.description.$invalid && create.description.$dirty}">
+        <label>Обложка</label>
+
+        <input class="form-control" type="file" ng-model="createForm.picture" base-sixty-four-input
+               name="picture"
+               maxsize="100"
+               accept="image/*"
+               required />
+
+        <span class="help-block has-error" ng-if="create.description.$dirty">
+          <span ng-show="create.picture.$error.required">Необходимо загрузить файл</span>
+          <span ng-show="create.picture.$error.maxsize">Максимальный размер файла 100 Kb</span>
+          <span ng-show="create.picture.$error.accept">Можно загрузить только графический файл</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="row prepare" ng-if="prepare">
+      <div class="control-group form-group col-xs-6">
+        <img ng-src="data:image/gif;base64,{{createForm.picture.base64}}" alt="{{createForm.title}}"
+        title="{{createForm.title}}" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="control-group form-group col-xs-12">
+        <button class="btn btn-primary btn-lg btn-block" type="submit" ng-disabled="create.$invalid">
+          Предварительный просмотр
+        </button>
+      </div>
+    </div>
+  </form>
+
+
+  <!--SCRIPTS-->
+  <script src="/js/dependencies/sails.io.js"></script>
+  <script src="/js/dependencies/angular.1.5.min.js"></script>
+  <script src="/js/dependencies/angular-base64-upload.min.js"></script>
+  <script src="/js/dependencies/angular-toastr.js"></script>
+  <script src="/js/dependencies/lodash.compat.min.js"></script>
+  <script src="/js/dependencies/rest-angular.min.js"></script>
+  <script src="/js/public/createBook/CreateBookModule.js"></script>
+  <script src="/js/public/library/LibraryModule.js"></script>
+  <script src="/js/public/createBook/CreateBookController.js"></script>
+  <script src="/js/public/library/LibraryController.js"></script>
+  <!--SCRIPTS END-->
+
+  </body>
+</html>
