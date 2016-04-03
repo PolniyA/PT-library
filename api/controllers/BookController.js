@@ -5,10 +5,13 @@ module.exports = {
   },
 
   'create': function (req, res, next) {
+    req.acceptsCharset('utf-8');
+
     Book.create(req.params.all(), function bookCreated(err, book) {
+
       if (err) return next(err);
 
-      res.redirect('/book/show/' + book.id)
+      //res.redirect('/book/show/' + book.id)
     });
   },
 
@@ -24,7 +27,7 @@ module.exports = {
   },
 
   'index': function (req, res, next) {
-    Book.find(function foundBook(err, books) {
+    Book.find(function foundBook(err, books ) {
       if (err) return next(err);
 
       res.view({

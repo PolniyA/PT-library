@@ -13,7 +13,8 @@ angular.module('CreateBookModule').controller('CreateBookController', function (
       year: $scope.createForm.year,
       genre: $scope.createForm.genre,
       description: $scope.createForm.description,
-      picture: $scope.createForm.picture.base64 // use option base64 of file object
+      picture: $scope.createForm.picture.base64, // use option base64 of file object
+      pictureType: $scope.createForm.picture.filetype // use option base64 of file object
     })
       .then(function onSuccess(){
         window.location = '/book'

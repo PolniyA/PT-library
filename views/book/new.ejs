@@ -122,9 +122,9 @@
       </div>
     </div>
 
-    <div class="row prepare" ng-if="prepare">
+    <div class="row prepare">
       <div class="control-group form-group col-xs-6">
-        <img ng-src="data:image/gif;base64,{{createForm.picture.base64}}" alt="{{createForm.title}}"
+        <img ng-src="data:{{createForm.picture.filetype}};base64,{{createForm.picture.base64}}" alt="{{createForm.title}}"
         title="{{createForm.title}}" />
       </div>
     </div>
@@ -146,8 +146,10 @@
   <script src="/js/dependencies/angular-toastr.js"></script>
   <script src="/js/dependencies/lodash.compat.min.js"></script>
   <script src="/js/dependencies/rest-angular.min.js"></script>
+  <script src="/js/public/booksList/BooksListModule.js"></script>
   <script src="/js/public/createBook/CreateBookModule.js"></script>
   <script src="/js/public/library/LibraryModule.js"></script>
+  <script src="/js/public/booksList/BooksListController.js"></script>
   <script src="/js/public/createBook/CreateBookController.js"></script>
   <script src="/js/public/library/LibraryController.js"></script>
   <!--SCRIPTS END-->

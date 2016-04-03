@@ -1,0 +1,1 @@
+angular.module('BooksListModule', ['restangular']);

@@ -1,3 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Library of your dreams</title>
+
+  <!-- Viewport mobile tag for sensible mobile support -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <!--STYLES-->
+  <link rel="stylesheet" href="/styles/angular-toastr.css">
+  <link rel="stylesheet" href="/styles/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles/importer.css">
+  <!--STYLES END-->
+
+  <script>
+    // global vairible for transport it to the angular
+    var globalBooks = <%- JSON.stringify(books) %>
+
+  </script>
+
+</head>
+
+<body ng-app="BooksListModule" ng-controller="BooksListController" ng-cloak>
+
+<h2 class="form-create-heading">Книги</h2>
+
+<div class="row">
+  <div class="control-group form-group col-xs-12"
+       ng-class="{'has-error' : create.title.$invalid && create.title.$dirty}">
+    <label>введите название книги</label>
+
+    <input type="text" class="form-control" placeholder="Вино из одуванчиков" name="filter"
+           ng-model="filter" />
+  </div>
+</div>
+
+
+
+<div class="row">
+  <div class="col-xs-3" ng-repeat="book in books">
+    <img src="data:{{book.pictureType}};base64,{{book.picture}}" alt="{{book.title}}"
+         title="{{book.title}}" />
+    <span>{{book.title}}</span>
+  </div>
+</div>
+
+
+
+
 <h3>Books</h3>
 <table>
   <tr>
@@ -20,3 +69,24 @@
 
   <% }) %>
 </table>
+
+
+
+<!--SCRIPTS-->
+<script src="/js/dependencies/sails.io.js"></script>
+<script src="/js/dependencies/angular.1.5.min.js"></script>
+<script src="/js/dependencies/angular-base64-upload.min.js"></script>
+<script src="/js/dependencies/angular-toastr.js"></script>
+<script src="/js/dependencies/lodash.compat.min.js"></script>
+<script src="/js/dependencies/rest-angular.min.js"></script>
+<script src="/js/public/booksList/BooksListModule.js"></script>
+<script src="/js/public/createBook/CreateBookModule.js"></script>
+<script src="/js/public/library/LibraryModule.js"></script>
+<script src="/js/public/booksList/BooksListController.js"></script>
+<script src="/js/public/createBook/CreateBookController.js"></script>
+<script src="/js/public/library/LibraryController.js"></script>
+<!--SCRIPTS END-->
+
+</body>
+</html>
+

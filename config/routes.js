@@ -38,7 +38,7 @@ module.exports.routes = {
 
   'GET /' : {view: 'library'},
 
-  'POST /book/new': 'BookController.create'
+  'POST /book': 'BookController.create'
 
 
   //'/': {
