@@ -11,7 +11,7 @@ module.exports = {
 
       if (err) return next(err);
 
-      //res.redirect('/book/show/' + book.id)
+      res.redirect('/book')
     });
   },
 
@@ -54,8 +54,6 @@ module.exports = {
         return res.redirect('/book/edit/' + req.param('id'))
       }
 
-
-      console.log("req", req);
       res.redirect('/book/show/' + req.param('id'));
     })
   },
@@ -66,4 +64,3 @@ module.exports = {
     });
   }
 };
-

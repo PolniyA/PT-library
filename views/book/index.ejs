@@ -14,7 +14,7 @@
 
   <script>
     // global vairible for transport it to the angular
-    var globalBooks = <%- JSON.stringify(books) %>
+    var globalBooks = <%- JSON.stringify(books) %>;
 
   </script>
 
@@ -30,22 +30,21 @@
     <label>введите название книги</label>
 
     <input type="text" class="form-control" placeholder="Вино из одуванчиков" name="filter"
-           ng-model="filter" />
+           ng-model="filter"
+           ng-change="booksFilter(filter)"/>
   </div>
 </div>
-
-
 
 <div class="row">
-  <div class="col-xs-3" ng-repeat="book in books">
-    <img src="data:{{book.pictureType}};base64,{{book.picture}}" alt="{{book.title}}"
-         title="{{book.title}}" />
+  <div class="col-xs-3" ng-repeat="book in filteredBooksList" ng-click="showBook(book.id)">
+    <img ng-src="data:{{book.pictureType}};base64,{{book.picture}}" alt="{{book.title}}" title="{{book.title}}" />
     <span>{{book.title}}</span>
   </div>
+
+  <div ng-if="!!filteredBooksList">
+    По Вашему запросу ничего не найдено
+  </div>
 </div>
-
-
-
 
 <h3>Books</h3>
 <table>
