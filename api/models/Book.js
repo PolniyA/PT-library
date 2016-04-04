@@ -56,14 +56,8 @@ module.exports = {
     // The set of comments for each book
     comments: {
       collection: 'commentsAndRatings',
-      via: 'comments'
-    },
-
-    // The float number that takes from user's rating
-    // e.g. 3.785
-    rating: {
-      collection: 'commentsAndRatings',
-      via: 'rating'
+      via: 'currentBook'
     }
+
   }
 };

@@ -1,14 +1,18 @@
 module.exports = {
 
   attributes: {
-    comments: {
+    currentBook: {
       model: 'book',
+      columnName: 'current_book',
+      required: true
+    },
+
+    comments: {
       type: 'text',
       required: true
     },
 
     rating: {
-      model: 'book',
       type: 'float',
       required: true
     }

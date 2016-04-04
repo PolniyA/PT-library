@@ -34,6 +34,7 @@ var jsFilesToInject = [
 
   // All of the rest of your client-side js files
   // will be injected here in no particular order.
+  'js/public/addCommentary/AddCommentaryModule.js',
   'js/public/booksList/BooksListModule.js',
   'js/public/createBook/CreateBookModule.js',
   'js/public/library/LibraryModule.js',
