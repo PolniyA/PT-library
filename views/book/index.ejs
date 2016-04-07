@@ -1,93 +1,32 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Library of your dreams</title>
-
-  <!-- Viewport mobile tag for sensible mobile support -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-
-  <!--STYLES-->
-  <link rel="stylesheet" href="/styles/angular-toastr.css">
-  <link rel="stylesheet" href="/styles/bootstrap.min.css">
-  <link rel="stylesheet" href="/styles/importer.css">
-  <!--STYLES END-->
-
-  <script>
+<script type="text/javascript-lazy">
     // global vairible for transport it to the angular
-    var globalBooks = <%- JSON.stringify(books) %>;
+    window.globalBooks = <%- JSON.stringify(books) %>;
 
-  </script>
+</script>
 
-</head>
+<div ng-app="BooksListModule" ng-controller="BooksListController" ng-cloak>
 
-<body ng-app="BooksListModule" ng-controller="BooksListController" ng-cloak>
+  <h2 class="form-create-heading">Книги</h2>
 
-<h2 class="form-create-heading">Книги</h2>
+  <div class="row">
+    <div class="control-group form-group col-xs-12"
+         ng-class="{'has-error' : create.title.$invalid && create.title.$dirty}">
+      <label>Введите название книги</label>
 
-<div class="row">
-  <div class="control-group form-group col-xs-12"
-       ng-class="{'has-error' : create.title.$invalid && create.title.$dirty}">
-    <label>введите название книги</label>
+      <input type="text" class="form-control" placeholder="Вино из одуванчиков" name="filter"
+             ng-model="filter"
+             ng-change="booksFilter(filter)"/>
+    </div>
+  </div>
 
-    <input type="text" class="form-control" placeholder="Вино из одуванчиков" name="filter"
-           ng-model="filter"
-           ng-change="booksFilter(filter)"/>
+  <div class="row">
+    <div class="col-xs-3" ng-repeat="book in filteredBooksList" ng-click="showBook(book.id)">
+      <img ng-src="data:{{book.pictureType}};base64,{{book.picture}}" alt="{{book.title}}" title="{{book.title}}"/>
+      <span>{{book.title}}</span>
+    </div>
+
+    <div ng-if="filteredBooksList.length == 0 && filter" class="col-xs-12">
+      По Вашему запросу ничего не найдено
+    </div>
   </div>
 </div>
-
-<div class="row">
-  <div class="col-xs-3" ng-repeat="book in filteredBooksList" ng-click="showBook(book.id)">
-    <img ng-src="data:{{book.pictureType}};base64,{{book.picture}}" alt="{{book.title}}" title="{{book.title}}" />
-    <span>{{book.title}}</span>
-  </div>
-
-  <div ng-if="!!filteredBooksList">
-    По Вашему запросу ничего не найдено
-  </div>
-</div>
-
-<h3>Books</h3>
-<table>
-  <tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Email</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-  <% _.each(books, function (book) { %>
-  <tr data-id="<% book.id%>" data-model="book">
-    <td><%= book.id %></td>
-    <td><%= book.name %></td>
-    <td><%= book.email %></td>
-    <td><a href="/book/show/<%= book.id %>">Show</a></td>
-    <td><a href="/book/edit/<%= book.id %>">Edit</a></td>
-    <td><a href="/book/destroy/<%= book.id %>">Delete</a></td>
-  </tr>
-
-  <% }) %>
-</table>
-
-
-
-<!--SCRIPTS-->
-<script src="/js/dependencies/sails.io.js"></script>
-<script src="/js/dependencies/angular.1.5.min.js"></script>
-<script src="/js/dependencies/angular-base64-upload.min.js"></script>
-<script src="/js/dependencies/angular-toastr.js"></script>
-<script src="/js/dependencies/lodash.compat.min.js"></script>
-<script src="/js/dependencies/rest-angular.min.js"></script>
-<script src="/js/public/addCommentary/AddCommentaryModule.js"></script>
-<script src="/js/public/booksList/BooksListModule.js"></script>
-<script src="/js/public/createBook/CreateBookModule.js"></script>
-<script src="/js/public/library/LibraryModule.js"></script>
-<script src="/js/public/addCommentary/AddCommentaryController.js"></script>
-<script src="/js/public/booksList/BooksListController.js"></script>
-<script src="/js/public/createBook/CreateBookController.js"></script>
-<script src="/js/public/library/LibraryController.js"></script>
-<!--SCRIPTS END-->
-
-</body>
-</html>
-
