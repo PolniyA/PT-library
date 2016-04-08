@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Library of your dreams</title>
-
-    <!-- Viewport mobile tag for sensible mobile support -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-
-    <!--STYLES-->
-    <link rel="stylesheet" href="/styles/angular-toastr.css">
-    <link rel="stylesheet" href="/styles/bootstrap.min.css">
-    <link rel="stylesheet" href="/styles/importer.css">
-    <!--STYLES END-->
-
-  </head>
-
-  <body ng-app="CreateBookModule" ng-controller="CreateBookController" ng-cloak>
+<div ng-app="CreateBookModule" ng-controller="CreateBookController" ng-cloak>
 
   <!-- Create form -->
   <form ng-submit="submitCreateBook()" id="create-book" class="form-create" name="create">
@@ -137,25 +121,4 @@
       </div>
     </div>
   </form>
-
-
-  <!--SCRIPTS-->
-  <script src="/js/dependencies/sails.io.js"></script>
-  <script src="/js/dependencies/angular.1.5.min.js"></script>
-  <script src="/js/dependencies/angular-base64-upload.min.js"></script>
-  <script src="/js/dependencies/angular-route.min.js"></script>
-  <script src="/js/dependencies/angular-toastr.js"></script>
-  <script src="/js/dependencies/lodash.compat.min.js"></script>
-  <script src="/js/dependencies/rest-angular.min.js"></script>
-  <script src="/js/public/addCommentary/AddCommentaryModule.js"></script>
-  <script src="/js/public/booksList/BooksListModule.js"></script>
-  <script src="/js/public/createBook/CreateBookModule.js"></script>
-  <script src="/js/public/library/LibraryModule.js"></script>
-  <script src="/js/public/addCommentary/AddCommentaryController.js"></script>
-  <script src="/js/public/booksList/BooksListController.js"></script>
-  <script src="/js/public/createBook/CreateBookController.js"></script>
-  <script src="/js/public/library/LibraryController.js"></script>
-  <!--SCRIPTS END-->
-
-  </body>
-</html>
+</div>

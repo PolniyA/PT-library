@@ -1,9 +1,8 @@
-angular.module('CreateBookModule').controller('CreateBookController', function ($scope, $http, Restangular) {
-  "use strict";
+"use strict";
 
-  $scope.createForm = {
+app.controller('CreateBookController', function ($scope, $route, $http, Restangular) {
 
-  };
+  $scope.createForm = {};
 
   $scope.submitCreateBook = function () {
 
@@ -17,13 +16,13 @@ angular.module('CreateBookModule').controller('CreateBookController', function (
       pictureType: $scope.createForm.picture.filetype // use option base64 of file object
     })
       .then(function onSuccess(){
-        window.location = '/book'
+        window.location = '#/book'
       })
       .catch(function onError(sailsResponse) {
         console.log(sailsResponse)
       })
       .finally(function eitherWay(){
-        $scope.createForm.location = false;
+        //$scope.createForm.location = false;
       })
   }
 });

@@ -1,60 +1,45 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Library of your dreams</title>
+<div ng-app="AddCommentaryModule" ng-controller="AddCommentaryController" ng-cloak>
 
-  <!-- Viewport mobile tag for sensible mobile support -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <%- JSON.stringify(book) %>
 
-  <!--STYLES-->
-  <link rel="stylesheet" href="/styles/angular-toastr.css">
-  <link rel="stylesheet" href="/styles/bootstrap.min.css">
-  <link rel="stylesheet" href="/styles/importer.css">
-  <!--STYLES END-->
+  <h1><%= book.title %></h1>
 
-</head>
+  <hr/>
 
-<body ng-app="AddCommentaryModule" ng-controller="AddCommentaryController" ng-cloak>
+  <h3>Commentaries</h3>
 
-<h1><%= book.title %></h1>
+  <table>
 
-<hr />
+    <% _.each(book.comments, function (comments) { %>
 
-<h3>Commentaries</h3>
+    <tr data-id="<% comments.id %>" data-model="book">
+      <td><%= comments.comments %></td>
+      <td><%= comments.rating %></td>
+    </tr>
+    <% }) %>
+  </table>
 
-<table> 
-
-  <% _.each(book.comments, function (comments) {%>
+  <div ng-click="showCommentaryForm(<%= book.id %>)">Добавить комментарий</div>
 
 
-  <tr data-id="<% comments.id %>" data-model="book">
-    <td><%= comments.comments %></td>
-    <td><%= comments.rating %></td>
-  </tr>
-  <% }) %>
-</table>
+  <form id="create-book" class="form-add-comment" name="addComment"
+        ng-if="addCommentaryForm.showForm"
+        ng-submit="submitAddCommentary()">
 
-<div ng-click="showCommentaryForm(<%= book.id %>)">Добавить комментарий</div>
+    <h2 class="form-add-comment-heading">Добавление книги</h2>
 
+    <input type="hidden"/>
 
-<form id="create-book" class="form-add-comment" name="addComment"
-      ng-if="addCommentaryForm.showForm"
-      ng-submit="submitAddCommentary()">
+    <div class="row">
+      <div class="control-group form-group col-xs-12"
+           ng-class="{'has-error' : addComment.rating.$invalid && addComment.rating.$dirty}">
+        <label>Оценка</label>
 
-  <h2 class="form-add-comment-heading">Добавление книги</h2>
-
-  <input type="hidden" />
-
-  <div class="row">
-    <div class="control-group form-group col-xs-12"
-         ng-class="{'has-error' : addComment.rating.$invalid && addComment.rating.$dirty}">
-      <label>Оценка</label>
-
-      <input type="number" class="form-control" placeholder="5" name="rating" required value="<%= book.id%>"
-             ng-model="addCommentaryForm.rating"
-             ng-maxlength="1"
-             max="5"
-             min="1"/>
+        <input type="number" class="form-control" placeholder="5" name="rating" required value="<%= book.id %>"
+               ng-model="addCommentaryForm.rating"
+               ng-maxlength="1"
+               max="5"
+               min="1"/>
 
         <span class="help-block has-error" ng-if="addComment.rating.$dirty">
           <span ng-show="addComment.rating.$error.required">Введите оценку</span>
@@ -62,13 +47,13 @@
           <span ng-show="addComment.rating.$error.max">Оценка не может быть больше 5</span>
           <span ng-show="addComment.rating.$error.min">Оценка не может быть меньше 1</span>
         </span>
+      </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="control-group form-group col-xs-12"
-         ng-class="{'has-error' : addComment.commentary.$invalid && addComment.commentary.$dirty}">
-      <label>Комментарий</label>
+    <div class="row">
+      <div class="control-group form-group col-xs-12"
+           ng-class="{'has-error' : addComment.commentary.$invalid && addComment.commentary.$dirty}">
+        <label>Комментарий</label>
 
         <textarea type="text" class="form-control" rows="4" required
                   placeholder="Я б прочел"
@@ -81,36 +66,15 @@
           <span ng-show="addComment.commentary.$error.required">Введите описание</span>
           <span ng-show="addComment.commentary.$error.minlength">Описание не может содеражать меньше 50 символов</span>
         </span>
+      </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="control-group form-group col-xs-12">
-      <button class="btn btn-primary btn-lg btn-block" type="submit" ng-disabled="addComment.$invalid">
-        Оставить комментарий
-      </button>
+    <div class="row">
+      <div class="control-group form-group col-xs-12">
+        <button class="btn btn-primary btn-lg btn-block" type="submit" ng-disabled="addComment.$invalid">
+          Оставить комментарий
+        </button>
+      </div>
     </div>
-  </div>
-</form>
-
-
-<!--SCRIPTS-->
-<script src="/js/dependencies/sails.io.js"></script>
-<script src="/js/dependencies/angular.1.5.min.js"></script>
-<script src="/js/dependencies/angular-base64-upload.min.js"></script>
-<script src="/js/dependencies/angular-route.min.js"></script>
-<script src="/js/dependencies/angular-toastr.js"></script>
-<script src="/js/dependencies/lodash.compat.min.js"></script>
-<script src="/js/dependencies/rest-angular.min.js"></script>
-<script src="/js/public/addCommentary/AddCommentaryModule.js"></script>
-<script src="/js/public/booksList/BooksListModule.js"></script>
-<script src="/js/public/createBook/CreateBookModule.js"></script>
-<script src="/js/public/library/LibraryModule.js"></script>
-<script src="/js/public/addCommentary/AddCommentaryController.js"></script>
-<script src="/js/public/booksList/BooksListController.js"></script>
-<script src="/js/public/createBook/CreateBookController.js"></script>
-<script src="/js/public/library/LibraryController.js"></script>
-<!--SCRIPTS END-->
-
-</body>
-</html>
+  </form>
+</div>

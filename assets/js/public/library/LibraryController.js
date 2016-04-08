@@ -1,3 +1,3 @@
-angular.module('LibraryModule').controller('LibraryController', function ($scope, Restangular) {
-
-});
+app.controller('LibraryController', ['$scope', function ($scope) {
+  
+}]);

@@ -14,7 +14,19 @@
 
   </head>
   <body ng-app="LibraryModule" ng-cloak>
+
+
+
+
     <h1>My first title</h1>
+
+    <ul class="menu">
+      <li><a href="#/book">BooksListModule</a></li>
+      <li><a href="#/book/new">CreateBookModule</a></li>
+    </ul>
+
+    <div ng-view></div>
+
 
     <!--SCRIPTS-->
     <script src="/js/dependencies/sails.io.js"></script>
@@ -33,15 +45,6 @@
     <script src="/js/public/createBook/CreateBookController.js"></script>
     <script src="/js/public/library/LibraryController.js"></script>
     <!--SCRIPTS END-->
-
-    <ul class="menu">
-      <li><a href="#/book">BooksListModule</a></li>
-      <li><a href="#/book/new">CreateBookModule</a></li>
-    </ul>
-
-    <div ng-view></div>
-
-    <div>Angular seed app: v<span app-version></span></div>
   </body>
 </html>
 

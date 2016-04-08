@@ -1,5 +1,6 @@
-angular.module('BooksListModule').controller('BooksListController', function ($scope) {
-  "use strict";
+"use strict";
+
+app.controller('BooksListController', function ($scope, $route) {
 
   $scope.booksList = window.globalBooks; // variable takes from request in the ejs for angular
 
@@ -16,6 +17,6 @@ angular.module('BooksListModule').controller('BooksListController', function ($s
   };
 
   $scope.showBook = function (id) {
-    window.location = '/book/show/' + id;
+    window.location = '/#/book/show/' + id;
   };
 });

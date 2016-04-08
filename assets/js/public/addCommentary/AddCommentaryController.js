@@ -1,4 +1,4 @@
-angular.module('AddCommentaryModule').controller('AddCommentaryController', function ($scope, $http, Restangular) {
+app.controller('AddCommentaryController', function ($scope, $http, Restangular) {
   "use strict";
 
   $scope.addCommentaryForm = {

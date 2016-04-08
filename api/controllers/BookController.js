@@ -10,13 +10,13 @@ module.exports = {
     Book.create(req.params.all(), function bookCreated(err, book) {
 
       if (err) return next(err);
-
-      res.redirect('/book')
+      res.redirect('/#/book')
     });
   },
 
   'show': function (req, res, next) {
-    Book.findOne(req.param('id')).populateAll().exec(function foundBook(err, book) {
+    Book.find(req.param('id')).limit(1).populateAll().exec(function foundBook(err, book) {
+
       if (err) return next(err);
       if (!book) return next();
 
